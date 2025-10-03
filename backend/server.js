@@ -11,7 +11,15 @@ connectDB();
 
 // Middlewares
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000' })); // allow frontend; change in production
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://personal-diary-eight.vercel.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 // Routes
 app.use('/api/diary', require('./routes/diary'));
